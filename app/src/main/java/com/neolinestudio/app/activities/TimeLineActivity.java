@@ -27,11 +27,18 @@ public class TimeLineActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.stories_rv);
 
         List<Integer> imageList = new ArrayList<>();
-        imageList.add(R.drawable.ic_header_logo);
-        imageList.add(R.drawable.ic_header_logo);
-        imageList.add(R.drawable.ic_header_logo);
+        imageList.add(R.drawable.ic_add);
+        imageList.add(R.drawable.ic_story);
+        imageList.add(R.drawable.ic_story);
+        imageList.add(R.drawable.ic_story);
 
-        ImageAdapter adapter = new ImageAdapter(imageList, this);
+        List<String> texts = new ArrayList<>();
+        texts.add("Damla");
+        texts.add("ErkanG");
+        texts.add("OrcXXX");
+        texts.add("DDED");
+
+        ImageAdapter adapter = new ImageAdapter(imageList,texts, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 

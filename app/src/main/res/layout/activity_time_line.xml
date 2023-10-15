@@ -35,7 +35,7 @@
             android:layout_height="34dp"
             android:background="@drawable/main_tab_bg"
             android:text="@string/following"
-            android:textSize="24px"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +47,6 @@
             android:background="@color/background_color"
             android:text="@string/for_you"
             android:textColor="@color/white"
-            android:textSize="24px"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button3"
             app:layout_constraintStart_toEndOf="@+id/button"
@@ -61,7 +60,6 @@
             android:background="@color/background_color"
             android:text="@string/trending"
             android:textColor="@color/white"
-            android:textSize="24px"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,7 +68,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/stories_rv"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
