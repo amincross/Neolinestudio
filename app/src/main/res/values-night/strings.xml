@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="following">Following</string>
+    <string name="for_you">For you</string>
+    <string name="trending">Trending</string>
+</resources>
