@@ -4,4 +4,9 @@
     <string name="for_you">For you</string>
     <string name="trending">Trending</string>
     <string name="your_cut">Your Cut</string>
+    <string name="home">Home</string>
+    <string name="discover">Discover</string>
+    <string name="nft">NFTmarket</string>
+    <string name="more">More</string>
+    <string name="profile">Profile</string>
 </resources>

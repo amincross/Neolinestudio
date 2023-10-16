@@ -11,5 +11,6 @@
 
     <color name="background_color">#08090D</color>
     <color name="tab_color">#76FF00</color>
+    <color name="transparent">#00F44336</color>
 
 </resources>
