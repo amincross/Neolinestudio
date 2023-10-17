@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.neolinestudio.app.R;
 import com.neolinestudio.app.adapters.ImageAdapter;
+import com.neolinestudio.app.adapters.MainPostAdapter;
+import com.neolinestudio.app.models.MyData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,8 @@ public class TimeLineActivity extends AppCompatActivity {
     private ImageView ibHomeButton, ibDiscoverButton, ibNftMarket, ibMore, ibProfile;
     private LinearLayout[] buttons;
     private TextView homeTv, discoverTv, nftTv, moreTv,profileTv;
+    private RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +35,26 @@ public class TimeLineActivity extends AppCompatActivity {
 
         setupStories();
         setupBottomNavigation();
+        setupPosts();
 
+    }
 
+    private void setupPosts() {
+        RecyclerView storiesRv = findViewById(R.id.recyclerView);
+
+        // Create dummy data
+        List<MyData> dataList = new ArrayList<>();
+        dataList.add(new MyData(R.drawable.ic_story, "Albert901", "5m",
+                getResources().getString(R.string.long_text), R.drawable.big_image, 20000,245000,12,256000,"Created 30 Jun 2023",false));
+
+        dataList.add(new MyData(R.drawable.ic_story, "Delsa", "5m",
+                getResources().getString(R.string.long_text), R.drawable.big_image, 20000,245000,12,256000,"Created 30 Jun 2023",true));
+        // Add more data...
+
+        // Set up RecyclerView
+        storiesRv.setLayoutManager(new LinearLayoutManager(this));
+        MainPostAdapter adapter = new MainPostAdapter(dataList);
+        storiesRv.setAdapter(adapter);
     }
 
     private void setupBottomNavigation() {
