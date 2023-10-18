@@ -20,9 +20,9 @@ import com.neolinestudio.app.R;
 import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
-    private List<Integer> imageList;
-    private List<String> textList;
-    private Context context;
+    private final List<Integer> imageList;
+    private final List<String> textList;
+    private final Context context;
 
     public ImageAdapter(List<Integer> imageList,List<String> textList, Context context) {
         this.imageList = imageList;
@@ -68,8 +68,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     }
 
     public static class ImageViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imageView;
-        private TextView textView;
+        private final ImageView imageView;
+        private final TextView textView;
 
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);

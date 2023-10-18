@@ -23,9 +23,9 @@ import java.util.List;
 
 // MyAdapter.java
 public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.ViewHolder> {
-    private List<MyData> items;
+    private final List<MyData> items;
     private Context context;
-    private FragmentManager fragmentManager;
+    private final FragmentManager fragmentManager;
 
     public MainPostAdapter(List<MyData> items, FragmentManager fragmentManager) {
         this.items = items;
@@ -67,25 +67,23 @@ public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.ViewHo
         });
 
 
-        holder.commentCountTextView.setOnClickListener(view -> {
-
-            BottomSheetDialog commentSheetDialog = new BottomSheetDialog(context);
-            View successBottomSheetView = LayoutInflater.from(context).inflate(R.layout.comment_bottom_sheet_layout, null);
-            commentSheetDialog.setContentView(successBottomSheetView);
-            commentSheetDialog.show();
-
-            Button btnPost=successBottomSheetView.findViewById(R.id.btnPost);
-            btnPost.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    commentSheetDialog.dismiss();
-                }
-            });
-
-        });
+        holder.commentIcon.setOnClickListener(view -> _showCommentBottomSheet());
+        holder.commentCountTextView.setOnClickListener(view -> _showCommentBottomSheet());
 
         // Set click listeners for the buttons if necessary
     }
+
+    private void _showCommentBottomSheet() {
+        BottomSheetDialog commentSheetDialog = new BottomSheetDialog(context);
+        View successBottomSheetView = LayoutInflater.from(context).inflate(R.layout.comment_bottom_sheet_layout, null);
+        commentSheetDialog.setContentView(successBottomSheetView);
+        commentSheetDialog.show();
+
+        Button btnPost=successBottomSheetView.findViewById(R.id.btnPost);
+        btnPost.setOnClickListener(view -> commentSheetDialog.dismiss());
+
+    }
+
 
     private void _showBottomSheet() {
 
@@ -156,20 +154,21 @@ public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.ViewHo
 
     // ViewHolder class for caching the views
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView avatarImageView;
-        private TextView usernameTextView;
-        private TextView onlineTimeTextView;
-        private TextView longTextView;
-        private ImageView bigImageView;
+        private final ImageView avatarImageView;
+        private final TextView usernameTextView;
+        private final TextView onlineTimeTextView;
+        private final TextView longTextView;
+        private final ImageView bigImageView;
+        private final ImageView commentIcon;
 
-        private TextView viewCountTextView;
-        private TextView likeCountTextView;
-        private TextView commentCountTextView;
-        private TextView retweetCountTextView;
+        private final TextView viewCountTextView;
+        private final TextView likeCountTextView;
+        private final TextView commentCountTextView;
+        private final TextView retweetCountTextView;
 
-        private LinearLayoutCompat llBid;
-        private FrameLayout line;
-        private AppCompatButton btnBid;
+        private final LinearLayoutCompat llBid;
+        private final FrameLayout line;
+        private final AppCompatButton btnBid;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -188,6 +187,7 @@ public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.ViewHo
             llBid = itemView.findViewById(R.id.llBid);
             line = itemView.findViewById(R.id.line);
             btnBid = itemView.findViewById(R.id.btnBid);
+            commentIcon = itemView.findViewById(R.id.commentIcon);
         }
     }
 }

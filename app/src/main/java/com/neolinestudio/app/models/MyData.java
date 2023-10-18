@@ -1,19 +1,19 @@
 package com.neolinestudio.app.models;
 
 public class MyData {
-    private int avatar;
-    private String username;
-    private String onlineTime;
-    private String longText;
-    private int bigImage;
+    private final int avatar;
+    private final String username;
+    private final String onlineTime;
+    private final String longText;
+    private final int bigImage;
 
-    private int viewCount;
-    private int likeCount;
-    private int commentCount;
-    private int retweetCount;
+    private final int viewCount;
+    private final int likeCount;
+    private final int commentCount;
+    private final int retweetCount;
 
-    private String createDate;
-    private boolean canBid;
+    private final String createDate;
+    private final boolean canBid;
 
     public MyData(int avatar, String username, String onlineTime, String longText, int bigImage, int viewCount, int likeCount, int commentCount, int retweetCount, String createDate, boolean canBid) {
         this.avatar = avatar;
