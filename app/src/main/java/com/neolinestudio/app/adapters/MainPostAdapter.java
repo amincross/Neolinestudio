@@ -1,17 +1,22 @@
 package com.neolinestudio.app.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.neolinestudio.app.R;
+import com.neolinestudio.app.fragments.CustomBottomSheetDialogFragment;
 import com.neolinestudio.app.models.MyData;
 
 import java.util.List;
@@ -19,14 +24,19 @@ import java.util.List;
 // MyAdapter.java
 public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.ViewHolder> {
     private List<MyData> items;
+    private Context context;
+    private FragmentManager fragmentManager;
 
-    public MainPostAdapter(List<MyData> items) {
+    public MainPostAdapter(List<MyData> items, FragmentManager fragmentManager) {
         this.items = items;
+        this.fragmentManager = fragmentManager;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        context=parent.getContext();
+
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
         return new ViewHolder(itemView);
     }
@@ -52,9 +62,74 @@ public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.ViewHo
         holder.llBid.setVisibility((item.isCanBid())?View.VISIBLE:View.GONE);
         holder.line.setVisibility((item.isCanBid())?View.VISIBLE:View.GONE);
 
+        holder.btnBid.setOnClickListener(view -> {
+            _showBottomSheet();
+        });
 
+
+        holder.commentCountTextView.setOnClickListener(view -> {
+
+            BottomSheetDialog commentSheetDialog = new BottomSheetDialog(context);
+            View successBottomSheetView = LayoutInflater.from(context).inflate(R.layout.comment_bottom_sheet_layout, null);
+            commentSheetDialog.setContentView(successBottomSheetView);
+            commentSheetDialog.show();
+
+            Button btnPost=successBottomSheetView.findViewById(R.id.btnPost);
+            btnPost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    commentSheetDialog.dismiss();
+                }
+            });
+
+        });
 
         // Set click listeners for the buttons if necessary
+    }
+
+    private void _showBottomSheet() {
+
+        // Create a BottomSheetDialog instance
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+
+        // Inflate the layout for the bottom sheet
+        View bottomSheetView = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_layout, null);
+
+        // Set the view for the bottom sheet dialog
+        bottomSheetDialog.setContentView(bottomSheetView);
+
+        // Show the bottom sheet dialog
+        bottomSheetDialog.show();
+
+        AppCompatButton btnSubmit=bottomSheetView.findViewById(R.id.btnSubmit);
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.dismiss();
+
+                BottomSheetDialog successBottomSheetDialog = new BottomSheetDialog(context);
+                View successBottomSheetView = LayoutInflater.from(context).inflate(R.layout.success_bottom_sheet_layout, null);
+                successBottomSheetDialog.setContentView(successBottomSheetView);
+                successBottomSheetDialog.show();
+
+                Button btnSubmit=successBottomSheetView.findViewById(R.id.btnSubmit);
+                btnSubmit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        successBottomSheetDialog.dismiss();
+                    }
+                });
+
+            }
+        });
+
+
+
+
+        /*CustomBottomSheetDialogFragment bottomSheetDialogFragment = new CustomBottomSheetDialogFragment();
+        bottomSheetDialogFragment.show(fragmentManager, "custom_bottom_sheet");*/
+
     }
 
     private String getCount(int number) {
@@ -94,6 +169,7 @@ public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.ViewHo
 
         private LinearLayoutCompat llBid;
         private FrameLayout line;
+        private AppCompatButton btnBid;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -111,6 +187,7 @@ public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.ViewHo
 
             llBid = itemView.findViewById(R.id.llBid);
             line = itemView.findViewById(R.id.line);
+            btnBid = itemView.findViewById(R.id.btnBid);
         }
     }
 }

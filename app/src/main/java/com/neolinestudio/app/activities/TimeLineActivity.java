@@ -1,6 +1,7 @@
 package com.neolinestudio.app.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,7 +54,10 @@ public class TimeLineActivity extends AppCompatActivity {
 
         // Set up RecyclerView
         storiesRv.setLayoutManager(new LinearLayoutManager(this));
-        MainPostAdapter adapter = new MainPostAdapter(dataList);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        MainPostAdapter adapter = new MainPostAdapter(dataList,fragmentManager);
         storiesRv.setAdapter(adapter);
     }
 
